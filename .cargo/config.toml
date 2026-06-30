@@ -1,0 +1,8 @@
+# This crate targets Fastly Compute only, so build for WASI by default and run
+# test binaries through viceroy (Fastly's local runtime). Host builds can't
+# link the Fastly hostcalls, so `cargo test`/`cargo build` use wasm32-wasip1.
+[build]
+target = "wasm32-wasip1"
+
+[target.wasm32-wasip1]
+runner = "viceroy run --"
